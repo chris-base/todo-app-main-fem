@@ -9,9 +9,9 @@ function App() {
       <div id='appBackgroundImg' />
 
       <div id='appContainer'>
-        <NewTodoComponent />
-
         <TitleDarkLightComponent />
+
+        <NewTodoComponent />
 
         <TodoListComponent />
       </div>

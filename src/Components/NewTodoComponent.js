@@ -9,7 +9,7 @@ const NewTodoComponent = () => {
       <div id='newTodoCompletedContainer' style={isCompleted ? { paddingRight: "20px" } : {}}>
         <div id='newTodoCompletedOutline'>
           <div id='newTodoCompletedCircle' className={isCompleted ? "fadeIn" : "fadeOut"} onClick={() => setIsCompleted(!isCompleted)}>
-            <div id='newTodoCompletedImg' style={isCompleted ? { display: "flex" } : { display: "flex" }} />
+            <div id='newTodoCompletedImg' />
           </div>
         </div>
       </div>

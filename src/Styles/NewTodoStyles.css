@@ -3,6 +3,7 @@
 #newTodoContainer {
   background-color: white;
   margin-top: 10px;
+  margin-bottom: 30px;
   height: 70px;
   display: flex;
   align-items: center;

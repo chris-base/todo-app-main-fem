@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
+
+#todoItemContainer {
+  background-color: white;
+  margin-top: 10px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+#todoCompletedContainer {
+  width: auto;
+  height: 100%;
+  padding: 0 20px 0 25px;
+  display: flex;
+  align-items: center;
+}
+
+#todoCompletedOutline {
+  border-radius: 15px;
+  border: 1px solid #e4e5f1;
+}
+
+#todoCompletedCircle {
+  background-color: transparent;
+  height: 25px;
+  width: 25px;
+  border-radius: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to bottom right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+
+#todoCompletedImg {
+  background-image: url("../../public/icon-check.svg");
+  width: 12px;
+  height: 12px;
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 2px 0 0 1px;
+}
+
+#todoItemText {
+  font-size: 18px;
+  font-family: "Josefin Sans";
+  color: #484b6a;
+}

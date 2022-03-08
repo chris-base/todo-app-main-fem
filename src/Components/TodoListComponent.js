@@ -1,23 +1,32 @@
-import { useState } from "react";
 import "../Styles/TodoListStyles.css";
 
-const TodoListComponent = () => {
-  const [isLastOnList, setIsLastOnList] = useState(true);
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [itemText, setItemText] = useState("This is a text item.");
-
+const TodoListComponent = ({ isLastOnList, todoList, setTodoList, listNumber }) => {
   return (
     <div id='todoItemContainer' style={isLastOnList ? { borderBottom: "1px solid #e4e5f1", borderRadius: "5px 5px 0 0" } : { borderRadius: "5px" }}>
-      <div id='todoCompletedContainer' style={isCompleted ? { paddingRight: "20px" } : {}}>
+      <div id='todoCompletedContainer' style={todoList[listNumber][0] ? { paddingRight: "20px" } : {}}>
         <div id='todoCompletedOutline'>
-          <div id='todoCompletedCircle' className={isCompleted ? "fadeIn" : "fadeOut"} onClick={() => setIsCompleted(!isCompleted)}>
+          <div
+            id='todoCompletedCircle'
+            className={todoList[listNumber][0] ? "fadeIn" : "fadeOut"}
+            onClick={() => {
+              setTodoList(
+                todoList.map((x, index) => {
+                  if (index === listNumber) {
+                    return [!todoList[listNumber][0], todoList[listNumber][1]];
+                  } else {
+                    return x;
+                  }
+                })
+              );
+            }}
+          >
             <div id='todoCompletedImg' />
           </div>
         </div>
       </div>
 
-      <p id='todoItemText' style={isCompleted ? { textDecoration: "line-through", color: "#d2d3db" } : {}}>
-        {itemText}
+      <p id='todoItemText' style={todoList[listNumber][0] ? { textDecoration: "line-through", color: "#d2d3db" } : {}}>
+        {todoList[listNumber][1]}
       </p>
     </div>
   );

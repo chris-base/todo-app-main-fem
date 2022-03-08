@@ -1,8 +1,23 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "../Styles/NewTodoStyles.css";
 
-const NewTodoComponent = () => {
+const NewTodoComponent = ({ todoList, setTodoList }) => {
   const [isCompleted, setIsCompleted] = useState(false);
+
+  const inputHref = useRef(null);
+
+  const onSubmitTodo = (e) => {
+    e.preventDefault();
+
+    if (inputHref.current.value.length > 0) {
+      let arrayHold = [...todoList];
+      arrayHold.push([isCompleted, inputHref.current.value]);
+      setTodoList(arrayHold);
+      setIsCompleted(false);
+    }
+
+    inputHref.current.value = "";
+  };
 
   return (
     <div id='newTodoContainer'>
@@ -13,7 +28,9 @@ const NewTodoComponent = () => {
           </div>
         </div>
       </div>
-      <input id='newTodoInput' type='text' placeholder='Create a new todo...' />
+      <form onSubmit={onSubmitTodo}>
+        <input ref={inputHref} id='newTodoInput' type='text' placeholder='Create a new todo...' />
+      </form>
     </div>
   );
 };

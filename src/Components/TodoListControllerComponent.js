@@ -1,10 +1,10 @@
 import "../Styles/TodoListControllerStyles.css";
 
-const TodoListControllerComponent = () => {
+const TodoListControllerComponent = ({ itemCount }) => {
   return (
     <div id='listControllerComponent'>
       <div>
-        <p className='controllerText'>items left</p>
+        <p className='controllerText'>{itemCount} items left</p>
       </div>
 
       <div id='controllerViewableContainer'>

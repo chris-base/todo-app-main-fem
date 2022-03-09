@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import NewTodoComponent from "./Components/NewTodoComponent";
 import TitleDarkLightComponent from "./Components/TitleDarkLightComponent";
+import EmptyTodoListComponent from "./Components/EmptyTodoListComponent";
 import TodoListComponent from "./Components/TodoListComponent";
 import TodoListControllerComponent from "./Components/TodoListControllerComponent";
 
@@ -18,17 +19,21 @@ function App() {
 
         <NewTodoComponent todoList={todoList} setTodoList={setTodoList} />
 
-        {[...todoList].map((x, index) => (
-          <TodoListComponent
-            isLastOnList={index === todoList.length - 1}
-            todoList={todoList}
-            setTodoList={setTodoList}
-            listNumber={index}
-            key={index}
-          />
-        ))}
+        {todoList.length > 0 ? (
+          [...todoList].map((x, index) => (
+            <TodoListComponent
+              isLastOnList={index === todoList.length - 1}
+              todoList={todoList}
+              setTodoList={setTodoList}
+              listNumber={index}
+              key={index}
+            />
+          ))
+        ) : (
+          <EmptyTodoListComponent />
+        )}
 
-        <TodoListControllerComponent itemCount={todoList.length} />
+        <TodoListControllerComponent todoList={todoList} />
       </div>
     </div>
   );

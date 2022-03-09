@@ -1,10 +1,22 @@
 import "../Styles/TodoListControllerStyles.css";
 
-const TodoListControllerComponent = ({ itemCount }) => {
+const TodoListControllerComponent = ({ todoList }) => {
+  const itemCount = () => {
+    let count = 0;
+    for (let i = 0; i < todoList.length; i++) {
+      if (!todoList[i][0]) {
+        count++;
+      }
+    }
+
+    const result = count + " items left";
+    return result;
+  };
+
   return (
     <div id='listControllerComponent'>
       <div>
-        <p className='controllerText'>{itemCount} items left</p>
+        <p className='controllerText'>{itemCount()}</p>
       </div>
 
       <div id='controllerViewableContainer'>

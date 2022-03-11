@@ -1,6 +1,6 @@
 import "../Styles/TodoListControllerStyles.css";
 
-const TodoListControllerComponent = ({ todoList }) => {
+const TodoListControllerComponent = ({ todoList, listViewable, setListViewable }) => {
   const itemCount = () => {
     let count = 0;
     for (let i = 0; i < todoList.length; i++) {
@@ -20,9 +20,15 @@ const TodoListControllerComponent = ({ todoList }) => {
       </div>
 
       <div id='controllerViewableContainer'>
-        <p className='controllerViewable'>All</p>
-        <p className='controllerViewable'>Active</p>
-        <p className='controllerViewable'>Completed</p>
+        <p className='controllerViewable' style={listViewable === 0 ? { color: "#3a7bfd" } : {}} onClick={() => setListViewable(0)}>
+          All
+        </p>
+        <p className='controllerViewable' style={listViewable === 1 ? { color: "#3a7bfd" } : {}} onClick={() => setListViewable(1)}>
+          Active
+        </p>
+        <p className='controllerViewable' style={listViewable === 2 ? { color: "#3a7bfd" } : {}} onClick={() => setListViewable(2)}>
+          Completed
+        </p>
       </div>
 
       <div>

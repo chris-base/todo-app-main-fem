@@ -1,9 +1,12 @@
 import "../Styles/EmptyTodoListStyles.css";
 
-const EmptyTodoListComponent = () => {
+const EmptyTodoListComponent = ({ listViewable }) => {
   return (
     <div id='emptyListComponent'>
-      <p id='emptyListText'>There are no items in the Todo list.</p>
+      <p id='emptyListText'>
+        There are no items {listViewable === 1 ? "active " : listViewable === 2 ? "completed " : ""}
+        in the Todo list.
+      </p>
     </div>
   );
 };

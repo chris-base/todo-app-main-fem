@@ -26,8 +26,6 @@ function App() {
       }
     }
 
-    console.log(listCount);
-
     return listCount === 0 ? <EmptyTodoListComponent listViewable={listViewable} key={0} /> : <></>;
   };
 
@@ -43,33 +41,15 @@ function App() {
         {todoList.length > 0 ? (
           [...todoList].map((currTodo, index) =>
             listViewable === 0 ? (
-              <TodoListComponent
-                isLastOnList={index === todoList.length - 1}
-                todoList={todoList}
-                setTodoList={setTodoList}
-                listNumber={index}
-                key={index}
-              />
+              <TodoListComponent isFirstOnList={index === 0} todoList={todoList} setTodoList={setTodoList} listNumber={index} key={index} />
             ) : listViewable === 1 ? (
               !currTodo[0] ? (
-                <TodoListComponent
-                  isLastOnList={index === todoList.length - 1}
-                  todoList={todoList}
-                  setTodoList={setTodoList}
-                  listNumber={index}
-                  key={index}
-                />
+                <TodoListComponent isFirstOnList={index === 0} todoList={todoList} setTodoList={setTodoList} listNumber={index} key={index} />
               ) : (
                 <></>
               )
             ) : currTodo[0] ? (
-              <TodoListComponent
-                isLastOnList={index === todoList.length - 1}
-                todoList={todoList}
-                setTodoList={setTodoList}
-                listNumber={index}
-                key={index}
-              />
+              <TodoListComponent isFirstOnList={index === 0} todoList={todoList} setTodoList={setTodoList} listNumber={index} key={index} />
             ) : (
               <></>
             )
@@ -80,7 +60,7 @@ function App() {
 
         {checkIfViewableIsEmpty()}
 
-        <TodoListControllerComponent todoList={todoList} listViewable={listViewable} setListViewable={setListViewable} />
+        <TodoListControllerComponent todoList={todoList} setTodoList={setTodoList} listViewable={listViewable} setListViewable={setListViewable} />
       </div>
     </div>
   );

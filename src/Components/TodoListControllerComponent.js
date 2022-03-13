@@ -1,6 +1,6 @@
 import "../Styles/TodoListControllerStyles.css";
 
-const TodoListControllerComponent = ({ todoList, listViewable, setListViewable }) => {
+const TodoListControllerComponent = ({ todoList, setTodoList, listViewable, setListViewable }) => {
   const itemCount = () => {
     let count = 0;
     for (let i = 0; i < todoList.length; i++) {
@@ -11,6 +11,22 @@ const TodoListControllerComponent = ({ todoList, listViewable, setListViewable }
 
     const result = count + " items left";
     return result;
+  };
+
+  const clearCompleted = () => {
+    if (todoList.length > 0) {
+      let updatedList = [...todoList];
+      let removeAmount = 0;
+
+      for (let i = 0; i < updatedList.length; i++) {
+        if (updatedList[i][0]) {
+          updatedList.splice(i, 1);
+          removeAmount++;
+        }
+      }
+
+      removeAmount > 0 && setTodoList(updatedList);
+    }
   };
 
   return (
@@ -32,7 +48,7 @@ const TodoListControllerComponent = ({ todoList, listViewable, setListViewable }
       </div>
 
       <div>
-        <p className='controllerText' style={{ cursor: "pointer" }}>
+        <p className='controllerText' style={{ cursor: "pointer" }} onClick={() => clearCompleted()}>
           Clear Completed
         </p>
       </div>

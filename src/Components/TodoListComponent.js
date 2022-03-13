@@ -1,8 +1,8 @@
 import "../Styles/TodoListStyles.css";
 
-const TodoListComponent = ({ isLastOnList, todoList, setTodoList, listNumber }) => {
+const TodoListComponent = ({ isFirstOnList, todoList, setTodoList, listNumber }) => {
   return (
-    <div id='todoItemContainer' style={isLastOnList ? { borderBottom: "1px solid #e4e5f1", borderRadius: "5px 5px 0 0" } : { borderRadius: "5px" }}>
+    <div id='todoItemContainer' style={isFirstOnList ? { borderRadius: "5px 5px 0 0" } : { borderRadius: "0px" }}>
       <div id='todoCompletedContainer' style={todoList[listNumber][0] ? { paddingRight: "20px" } : {}}>
         <div id='todoCompletedOutline'>
           <div
@@ -26,7 +26,7 @@ const TodoListComponent = ({ isLastOnList, todoList, setTodoList, listNumber }) 
       </div>
 
       <p id='todoItemText' style={todoList[listNumber][0] ? { textDecoration: "line-through", color: "#d2d3db" } : {}}>
-        {todoList[listNumber][1]}
+        {todoList[listNumber][1] + " "}
       </p>
     </div>
   );

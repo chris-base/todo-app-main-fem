@@ -10,6 +10,7 @@ function App() {
   const [theme, setTheme] = useState(false);
   const [todoList, setTodoList] = useState([]);
   const [listViewable, setListViewable] = useState(0);
+  let firstPos = 0;
 
   const checkIfViewableIsEmpty = () => {
     let listCount = 0;
@@ -41,15 +42,33 @@ function App() {
         {todoList.length > 0 ? (
           [...todoList].map((currTodo, index) =>
             listViewable === 0 ? (
-              <TodoListComponent isFirstOnList={index === 0} todoList={todoList} setTodoList={setTodoList} listNumber={index} key={index} />
+              <TodoListComponent
+                isFirstOnList={firstPos === 0 && firstPos++}
+                todoList={todoList}
+                setTodoList={setTodoList}
+                listNumber={index}
+                key={index}
+              />
             ) : listViewable === 1 ? (
               !currTodo[0] ? (
-                <TodoListComponent isFirstOnList={index === 0} todoList={todoList} setTodoList={setTodoList} listNumber={index} key={index} />
+                <TodoListComponent
+                  isFirstOnList={firstPos === 0 && firstPos++}
+                  todoList={todoList}
+                  setTodoList={setTodoList}
+                  listNumber={index}
+                  key={index}
+                />
               ) : (
                 <></>
               )
             ) : currTodo[0] ? (
-              <TodoListComponent isFirstOnList={index === 0} todoList={todoList} setTodoList={setTodoList} listNumber={index} key={index} />
+              <TodoListComponent
+                isFirstOnList={firstPos === 0 && firstPos++}
+                todoList={todoList}
+                setTodoList={setTodoList}
+                listNumber={index}
+                key={index}
+              />
             ) : (
               <></>
             )

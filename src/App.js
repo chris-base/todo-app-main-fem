@@ -39,18 +39,30 @@ function App() {
 
         <NewTodoComponent todoList={todoList} setTodoList={setTodoList} />
 
-        {todoList.length > 0 ? (
-          [...todoList].map((currTodo, index) =>
-            listViewable === 0 ? (
-              <TodoListComponent
-                isFirstOnList={firstPos === 0 && firstPos++}
-                todoList={todoList}
-                setTodoList={setTodoList}
-                listNumber={index}
-                key={index}
-              />
-            ) : listViewable === 1 ? (
-              !currTodo[0] ? (
+        <div id='listContainer'>
+          {todoList.length > 0 ? (
+            [...todoList].map((currTodo, index) =>
+              listViewable === 0 ? (
+                <TodoListComponent
+                  isFirstOnList={firstPos === 0 && firstPos++}
+                  todoList={todoList}
+                  setTodoList={setTodoList}
+                  listNumber={index}
+                  key={index}
+                />
+              ) : listViewable === 1 ? (
+                !currTodo[0] ? (
+                  <TodoListComponent
+                    isFirstOnList={firstPos === 0 && firstPos++}
+                    todoList={todoList}
+                    setTodoList={setTodoList}
+                    listNumber={index}
+                    key={index}
+                  />
+                ) : (
+                  <></>
+                )
+              ) : currTodo[0] ? (
                 <TodoListComponent
                   isFirstOnList={firstPos === 0 && firstPos++}
                   todoList={todoList}
@@ -61,21 +73,11 @@ function App() {
               ) : (
                 <></>
               )
-            ) : currTodo[0] ? (
-              <TodoListComponent
-                isFirstOnList={firstPos === 0 && firstPos++}
-                todoList={todoList}
-                setTodoList={setTodoList}
-                listNumber={index}
-                key={index}
-              />
-            ) : (
-              <></>
             )
-          )
-        ) : (
-          <></>
-        )}
+          ) : (
+            <></>
+          )}
+        </div>
 
         {checkIfViewableIsEmpty()}
 

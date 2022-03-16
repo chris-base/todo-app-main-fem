@@ -6,16 +6,24 @@ const TodoListComponent = ({ isFirstOnList, todoList, setTodoList, listNumber })
   let startDrag = [0, 0];
 
   const onDragStartItem = (e) => {
-    console.log("drag started " + e.screenX + " \n " + mainItemDiv.current.offsetRight);
-    startDrag = [e.screenX, e.screenY];
+    // console.log("drag started " + e.screenX + " \n " + mainItemDiv.current.offsetRight);
+
+    startDrag = e.target.offsetTop + 35;
   };
 
   const onDragEndItem = (e) => {
-    console.log("dragged here " + e.screenX);
+    let draggedToY = e.screenY - 100;
+    console.log("dragged here " + draggedToY);
+    // console.log(e.view);
     if (e.screenX >= mainItemDiv.current.offsetLeft && e.screenX <= mainItemDiv.current.offsetLeft + 520) {
-      console.log("inbound --------------" + startDrag);
+      // console.log("999999999 " + Object.keys(e));
+      // console.log(e.currentTarget);
 
-      let amountToMove = -((startDrag[1] - e.screenY) / 65) | 0;
+      let amountToMove = startDrag < draggedToY ? (-((startDrag - draggedToY) / 70) + 1) | 0 : -((startDrag - draggedToY) / 70) | 0;
+
+      const outputTEXT = -(startDrag - draggedToY) / 70;
+
+      console.log("Start Drag: " + startDrag + " Distance: " + -(startDrag - draggedToY) + "\tListPos: " + amountToMove);
 
       let newPos =
         amountToMove + listNumber <= 0 ? 0 : amountToMove + listNumber >= todoList.length ? todoList.length + 1 : amountToMove + listNumber;
@@ -38,6 +46,11 @@ const TodoListComponent = ({ isFirstOnList, todoList, setTodoList, listNumber })
         setTodoList(newTodoArr);
       }
     }
+  };
+
+  const onDragSpam = (e) => {
+    // console.log(Object.keys(e));
+    console.log(e.clientY);
   };
 
   return (

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import "../Styles/TodoListStyles.css";
 
-const TodoListComponent = ({ isFirstOnList, todoList, setTodoList, listNumber }) => {
+const TodoListComponent = ({ isFirstOnList, todoList, setTodoList, listNumber, theme }) => {
   let mainItemDiv = useRef(null);
   let startDrag = [0, 0];
 
@@ -53,6 +53,8 @@ const TodoListComponent = ({ isFirstOnList, todoList, setTodoList, listNumber })
     console.log(e.clientY);
   };
 
+  // theme ? { backgroundColor: "#fafafa", borderBottom: "1px solid #e4e5f1" } : { backgroundColor: "#25273c", borderBottom: "1px solid #393a4c" }
+
   return (
     <div
       id='todoItemContainer'
@@ -60,10 +62,18 @@ const TodoListComponent = ({ isFirstOnList, todoList, setTodoList, listNumber })
       draggable={true}
       onDragStart={onDragStartItem}
       onDragEnd={onDragEndItem}
-      style={isFirstOnList === 0 ? { borderRadius: "5px 5px 0 0" } : { borderRadius: "0px" }}
+      style={
+        isFirstOnList === 0
+          ? theme
+            ? { backgroundColor: "white", borderRadius: "5px 5px 0 0", borderBottom: "1px solid #e4e5f1" }
+            : { backgroundColor: "#25273c", borderRadius: "5px 5px 0 0", borderBottom: "1px solid #393a4c" }
+          : theme
+          ? { backgroundColor: "white", borderRadius: "0px", borderBottom: "1px solid #e4e5f1" }
+          : { backgroundColor: "#25273c", borderRadius: "0px", borderBottom: "1px solid #393a4c" }
+      }
     >
       <div id='todoCompletedContainer' style={todoList[listNumber][0] ? { paddingRight: "20px" } : {}}>
-        <div id='todoCompletedOutline'>
+        <div id='todoCompletedOutline' style={theme ? { border: "1px solid #e4e5f1" } : { border: "1px solid #393a4c" }}>
           <div
             id='todoCompletedCircle'
             className={todoList[listNumber][0] ? "fadeIn" : "fadeOut"}
@@ -84,11 +94,30 @@ const TodoListComponent = ({ isFirstOnList, todoList, setTodoList, listNumber })
         </div>
       </div>
 
-      <p id='todoItemText' style={todoList[listNumber][0] ? { textDecoration: "line-through", color: "#d2d3db" } : {}}>
+      <p
+        id='todoItemText'
+        style={
+          todoList[listNumber][0]
+            ? theme
+              ? { textDecoration: "line-through", color: "#d2d3db" }
+              : { textDecoration: "line-through", color: "#4d5066" }
+            : theme
+            ? { color: "#484b6a" }
+            : { color: "white" }
+        }
+      >
         {todoList[listNumber][1]}
       </p>
     </div>
   );
 };
 
-export default TodoListComponent;
+export default TodoListComponent; // color: #484b6a;
+
+// // theme
+// ? { backgroundColor: "white", borderRadius: "0px" }
+// : { backgroundColor: "#25273c", borderRadius: "0px" }
+
+// textDecoration: "line-through", color: "#d2d3db"
+
+// theme ? { color: "#484b6a" } : { color: "#cacde8" }

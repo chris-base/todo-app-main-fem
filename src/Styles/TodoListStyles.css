@@ -6,8 +6,8 @@
   height: 70px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #e4e5f1;
   border-radius: 5px 5px 0 0;
+  cursor: grab;
 }
 
 #todoCompletedContainer {
@@ -48,5 +48,4 @@
 #todoItemText {
   font-size: 18px;
   font-family: "Josefin Sans";
-  color: #484b6a;
 }

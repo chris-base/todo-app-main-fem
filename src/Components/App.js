@@ -1,13 +1,19 @@
 import { useState } from "react";
-import "./App.css";
-import NewTodoComponent from "./Components/NewTodoComponent";
-import TitleDarkLightComponent from "./Components/TitleDarkLightComponent";
-import EmptyTodoListComponent from "./Components/EmptyTodoListComponent";
-import TodoListComponent from "./Components/TodoListComponent";
-import TodoListControllerComponent from "./Components/TodoListControllerComponent";
+import "../Styles/App.css";
+import NewTodoComponent from "./NewTodoComponent";
+import TitleDarkLightComponent from "./TitleDarkLightComponent";
+import EmptyTodoListComponent from "./EmptyTodoListComponent";
+import TodoListComponent from "./TodoListComponent";
+import TodoListControllerComponent from "./TodoListControllerComponent";
+
+import bgLightDesktop from "./images/bg-desktop-light.jpg";
+import bgDarkDesktop from "./images/bg-desktop-dark.jpg";
+
+import bgLightMobile from "./images/bg-mobile-light.jpg";
+import bgDarkMobile from "./images/bg-mobile-dark.jpg";
 
 function App() {
-  const [theme, setTheme] = useState(false);
+  const [theme, setTheme] = useState(false); // light = true : dark = false
   const [todoList, setTodoList] = useState([]);
   const [listViewable, setListViewable] = useState(0);
   let firstPos = 0;
@@ -27,17 +33,20 @@ function App() {
       }
     }
 
-    return listCount === 0 ? <EmptyTodoListComponent listViewable={listViewable} key={0} /> : <></>;
+    return listCount === 0 ? <EmptyTodoListComponent listViewable={listViewable} theme={theme} key={0} /> : <></>;
   };
 
   return (
-    <div className='App'>
-      <div id='appBackgroundImg' />
+    <div className='App' style={theme ? { backgroundColor: "white" } : { backgroundColor: "#161722" }}>
+      <div
+        id='appBackgroundImg'
+        style={theme ? { backgroundImage: "url(" + bgLightDesktop + ")" } : { backgroundImage: "url(" + bgDarkDesktop + ")" }}
+      />
 
       <div id='appContainer'>
-        <TitleDarkLightComponent />
+        <TitleDarkLightComponent theme={theme} setTheme={setTheme} />
 
-        <NewTodoComponent todoList={todoList} setTodoList={setTodoList} />
+        <NewTodoComponent todoList={todoList} setTodoList={setTodoList} theme={theme} />
 
         <div id='listContainer'>
           {todoList.length > 0 ? (
@@ -47,6 +56,7 @@ function App() {
                   isFirstOnList={firstPos === 0 && firstPos++}
                   todoList={todoList}
                   setTodoList={setTodoList}
+                  theme={theme}
                   listNumber={index}
                   key={index}
                 />
@@ -56,6 +66,7 @@ function App() {
                     isFirstOnList={firstPos === 0 && firstPos++}
                     todoList={todoList}
                     setTodoList={setTodoList}
+                    theme={theme}
                     listNumber={index}
                     key={index}
                   />
@@ -67,6 +78,7 @@ function App() {
                   isFirstOnList={firstPos === 0 && firstPos++}
                   todoList={todoList}
                   setTodoList={setTodoList}
+                  theme={theme}
                   listNumber={index}
                   key={index}
                 />
@@ -81,8 +93,18 @@ function App() {
 
         {checkIfViewableIsEmpty()}
 
-        <TodoListControllerComponent todoList={todoList} setTodoList={setTodoList} listViewable={listViewable} setListViewable={setListViewable} />
+        <TodoListControllerComponent
+          todoList={todoList}
+          setTodoList={setTodoList}
+          listViewable={listViewable}
+          setListViewable={setListViewable}
+          theme={theme}
+        />
       </div>
+
+      <p id='infoAppText' style={theme ? { color: "#9394a5" } : { color: "#777a92" }}>
+        Drag and drop to reorder list
+      </p>
     </div>
   );
 }

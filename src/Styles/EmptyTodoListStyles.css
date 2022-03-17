@@ -1,14 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
 
 #emptyListComponent {
-  background-color: #fafafa;
   margin-top: 10px;
   margin-bottom: 0;
   height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #e4e5f1;
   border-radius: 5px 5px 0 0;
 }
 

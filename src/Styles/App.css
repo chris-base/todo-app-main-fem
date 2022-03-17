@@ -1,15 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
+
 .App {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
 }
 
 #appBackgroundImg {
   position: absolute;
-  z-index: -1;
   height: 300px;
   width: 100%;
   top: 0;
-  background-image: url("../public/bg-desktop-light.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -18,10 +20,18 @@
 #appContainer {
   width: 500px;
   padding-top: 50px;
+  z-index: 1;
 }
 
 #listContainer {
-  max-height: 600px;
+  max-height: 500px;
   overflow-y: auto;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+#infoAppText {
+  margin-top: 50px;
+  font-family: "Josefin Sans";
+  font-weight: 400;
+  font-size: 15px;
 }

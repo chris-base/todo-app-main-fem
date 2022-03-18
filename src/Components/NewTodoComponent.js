@@ -28,10 +28,11 @@ const NewTodoComponent = ({ todoList, setTodoList, theme }) => {
           </div>
         </div>
       </div>
-      <form onSubmit={onSubmitTodo}>
+      <form onSubmit={onSubmitTodo} id='newItemFormContainer'>
         <input
           ref={inputHref}
           id='newTodoInput'
+          maxlength={35}
           type='text'
           placeholder='Create a new todo...'
           style={theme ? { color: "#484b6a" } : { color: "#cacde8" }}

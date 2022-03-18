@@ -6,24 +6,14 @@ const TodoListComponent = ({ isFirstOnList, todoList, setTodoList, listNumber, t
   let startDrag = [0, 0];
 
   const onDragStartItem = (e) => {
-    // console.log("drag started " + e.screenX + " \n " + mainItemDiv.current.offsetRight);
-
     startDrag = e.target.offsetTop + 35;
   };
 
   const onDragEndItem = (e) => {
     let draggedToY = e.screenY - 100;
-    console.log("dragged here " + draggedToY);
-    // console.log(e.view);
+
     if (e.screenX >= mainItemDiv.current.offsetLeft && e.screenX <= mainItemDiv.current.offsetLeft + 520) {
-      // console.log("999999999 " + Object.keys(e));
-      // console.log(e.currentTarget);
-
       let amountToMove = startDrag < draggedToY ? (-((startDrag - draggedToY) / 70) + 1) | 0 : -((startDrag - draggedToY) / 70) | 0;
-
-      const outputTEXT = -(startDrag - draggedToY) / 70;
-
-      console.log("Start Drag: " + startDrag + " Distance: " + -(startDrag - draggedToY) + "\tListPos: " + amountToMove);
 
       let newPos =
         amountToMove + listNumber <= 0 ? 0 : amountToMove + listNumber >= todoList.length ? todoList.length + 1 : amountToMove + listNumber;
@@ -34,8 +24,6 @@ const TodoListComponent = ({ isFirstOnList, todoList, setTodoList, listNumber, t
         let newTodoArr = [...todoList];
 
         let itemHolder = newTodoArr[listNumber];
-
-        console.log("THSI IS ITEMOLHLE R  " + insertAt);
 
         newTodoArr.splice(listNumber, 1);
 
@@ -48,12 +36,13 @@ const TodoListComponent = ({ isFirstOnList, todoList, setTodoList, listNumber, t
     }
   };
 
-  const onDragSpam = (e) => {
-    // console.log(Object.keys(e));
-    console.log(e.clientY);
-  };
+  const deleteItemInList = () => {
+    let newArray = [...todoList];
 
-  // theme ? { backgroundColor: "#fafafa", borderBottom: "1px solid #e4e5f1" } : { backgroundColor: "#25273c", borderBottom: "1px solid #393a4c" }
+    newArray.splice(listNumber, 1);
+
+    setTodoList(newArray);
+  };
 
   return (
     <div
@@ -72,52 +61,48 @@ const TodoListComponent = ({ isFirstOnList, todoList, setTodoList, listNumber, t
           : { backgroundColor: "#25273c", borderRadius: "0px", borderBottom: "1px solid #393a4c" }
       }
     >
-      <div id='todoCompletedContainer' style={todoList[listNumber][0] ? { paddingRight: "20px" } : {}}>
-        <div id='todoCompletedOutline' style={theme ? { border: "1px solid #e4e5f1" } : { border: "1px solid #393a4c" }}>
-          <div
-            id='todoCompletedCircle'
-            className={todoList[listNumber][0] ? "fadeIn" : "fadeOut"}
-            onClick={() => {
-              setTodoList(
-                todoList.map((x, index) => {
-                  if (index === listNumber) {
-                    return [!todoList[listNumber][0], todoList[listNumber][1]];
-                  } else {
-                    return x;
-                  }
-                })
-              );
-            }}
-          >
-            <div id='todoCompletedImg' />
+      <div id='mainTodoItemContents'>
+        <div id='todoCompletedContainer' style={todoList[listNumber][0] ? { paddingRight: "20px" } : {}}>
+          <div id='todoCompletedOutline' style={theme ? { border: "1px solid #e4e5f1" } : { border: "1px solid #393a4c" }}>
+            <div
+              id='todoCompletedCircle'
+              className={todoList[listNumber][0] ? "fadeIn" : "fadeOut"}
+              onClick={() => {
+                setTodoList(
+                  todoList.map((x, index) => {
+                    if (index === listNumber) {
+                      return [!todoList[listNumber][0], todoList[listNumber][1]];
+                    } else {
+                      return x;
+                    }
+                  })
+                );
+              }}
+            >
+              <div id='todoCompletedImg' />
+            </div>
           </div>
         </div>
+
+        <p
+          id='todoItemText'
+          style={
+            todoList[listNumber][0]
+              ? theme
+                ? { textDecoration: "line-through", color: "#d2d3db" }
+                : { textDecoration: "line-through", color: "#4d5066" }
+              : theme
+              ? { color: "#484b6a" }
+              : { color: "white" }
+          }
+        >
+          {todoList[listNumber][1]}
+        </p>
       </div>
 
-      <p
-        id='todoItemText'
-        style={
-          todoList[listNumber][0]
-            ? theme
-              ? { textDecoration: "line-through", color: "#d2d3db" }
-              : { textDecoration: "line-through", color: "#4d5066" }
-            : theme
-            ? { color: "#484b6a" }
-            : { color: "white" }
-        }
-      >
-        {todoList[listNumber][1]}
-      </p>
+      <div id='deleteItem' onClick={deleteItemInList} />
     </div>
   );
 };
 
-export default TodoListComponent; // color: #484b6a;
-
-// // theme
-// ? { backgroundColor: "white", borderRadius: "0px" }
-// : { backgroundColor: "#25273c", borderRadius: "0px" }
-
-// textDecoration: "line-through", color: "#d2d3db"
-
-// theme ? { color: "#484b6a" } : { color: "#cacde8" }
+export default TodoListComponent;

@@ -8,6 +8,14 @@
   align-items: center;
   border-radius: 5px 5px 0 0;
   cursor: grab;
+  justify-content: space-between;
+}
+
+#mainTodoItemContents {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  max-width: 90%;
 }
 
 #todoCompletedContainer {
@@ -48,4 +56,19 @@
 #todoItemText {
   font-size: 18px;
   font-family: "Josefin Sans";
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+#deleteItem {
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+  margin-right: 20px;
+  background-image: url("../../public/icon-cross.svg");
+  background-size: 18px;
+  background-repeat: no-repeat;
+  background-position: center;
 }

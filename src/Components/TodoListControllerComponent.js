@@ -1,6 +1,9 @@
+import { useState, useEffect } from "react";
 import "../Styles/TodoListControllerStyles.css";
 
 const TodoListControllerComponent = ({ todoList, setTodoList, listViewable, setListViewable, theme }) => {
+  const [clientWidth, setClientWidth] = useState(window.innerWidth);
+
   const itemCount = () => {
     let count = 0;
     for (let i = 0; i < todoList.length; i++) {
@@ -29,15 +32,14 @@ const TodoListControllerComponent = ({ todoList, setTodoList, listViewable, setL
     }
   };
 
-  return (
-    <div id='listControllerComponent' style={theme ? { backgroundColor: "white" } : { backgroundColor: "#25273c" }}>
-      <div>
-        <p className='controllerText' style={theme ? { color: "#9394a5" } : { color: "#777a92" }}>
-          {itemCount()}
-        </p>
-      </div>
+  useEffect(() => {
+    const resizeWindow = () => setClientWidth(window.innerWidth);
+    window.addEventListener("resize", resizeWindow);
+  });
 
-      <div id='controllerViewableContainer'>
+  const controllerViewables = () => {
+    return (
+      <div id='controllerViewableContainer' style={clientWidth <= 521 ? { width: "100%" } : {}}>
         <p
           className='controllerViewable'
           style={listViewable === 0 ? { color: "#3a7bfd" } : theme ? { color: "#9394a5" } : { color: "#777a92" }}
@@ -60,12 +62,34 @@ const TodoListControllerComponent = ({ todoList, setTodoList, listViewable, setL
           Completed
         </p>
       </div>
+    );
+  };
 
-      <div>
-        <p id='clearHover' className='controllerText' style={theme ? { color: "#9394a5" } : { color: "#777a92" }} onClick={() => clearCompleted()}>
-          Clear Completed
-        </p>
+  return (
+    <div>
+      <div id='listControllerComponent' style={theme ? { backgroundColor: "white" } : { backgroundColor: "#25273c" }}>
+        <div>
+          <p className='controllerText' style={theme ? { color: "#9394a5" } : { color: "#777a92" }}>
+            {itemCount()}
+          </p>
+        </div>
+
+        {clientWidth >= 521 ? controllerViewables() : <></>}
+
+        <div>
+          <p id='clearHover' className='controllerText' style={theme ? { color: "#9394a5" } : { color: "#777a92" }} onClick={() => clearCompleted()}>
+            Clear Completed
+          </p>
+        </div>
       </div>
+
+      {clientWidth <= 521 ? (
+        <div id='mobileControllerViews' style={theme ? { backgroundColor: "white" } : { backgroundColor: "#25273c" }}>
+          {controllerViewables()}
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

@@ -40,7 +40,15 @@ function App() {
     <div className='App' style={theme ? { backgroundColor: "white" } : { backgroundColor: "#161722" }}>
       <div
         id='appBackgroundImg'
-        style={theme ? { backgroundImage: "url(" + bgLightDesktop + ")" } : { backgroundImage: "url(" + bgDarkDesktop + ")" }}
+        style={
+          theme
+            ? window.innerWidth >= 521
+              ? { backgroundImage: "url(" + bgLightDesktop + ")" }
+              : { backgroundImage: "url(" + bgLightMobile + ")" }
+            : window.innerWidth >= 521
+            ? { backgroundImage: "url(" + bgDarkDesktop + ")" }
+            : { backgroundImage: "url(" + bgDarkMobile + ")" }
+        }
       />
 
       <div id='appContainer'>

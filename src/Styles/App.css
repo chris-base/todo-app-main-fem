@@ -35,3 +35,9 @@
   font-weight: 400;
   font-size: 15px;
 }
+
+@media (max-width: 520px) {
+  #appContainer {
+    width: 95%;
+  }
+}

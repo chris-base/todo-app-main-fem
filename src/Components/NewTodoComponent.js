@@ -32,7 +32,7 @@ const NewTodoComponent = ({ todoList, setTodoList, theme }) => {
         <input
           ref={inputHref}
           id='newTodoInput'
-          maxlength={35}
+          maxLength={35}
           type='text'
           placeholder='Create a new todo...'
           style={theme ? { color: "#484b6a" } : { color: "#cacde8" }}

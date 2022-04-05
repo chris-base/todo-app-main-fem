@@ -40,4 +40,8 @@
   #appContainer {
     width: 95%;
   }
+
+  #listContainer {
+    max-height: 350px;
+  }
 }
